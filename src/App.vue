@@ -15,7 +15,7 @@
     /**
      * The name of the application.
      */
-    name: 'vue-boilerplate',
+    name: 'vue-singlePage',
 
     /**
      * Fires when the app has been mounted.

@@ -57,7 +57,9 @@
      * The name of the page.
      */
     name: 'account-index',
-
+mounted(){
+  // return this.$store.commit.email
+},
     /**
      * The components that the page can use.
      */

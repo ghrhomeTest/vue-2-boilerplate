@@ -1,98 +1,73 @@
 <template>
   <v-layout>
-    <v-card contextual-style="dark">
+    <v-card contextual-style="dark" v-if="show">
       <span slot="header">
-        Welcome!
+        一级主页面
       </span>
-      <div slot="body">
-        <p>
-          Get started with the Vue 2 boilerplate
-        </p>
-        <p>
-          For questions, contact me:
-        </p>
-        <p>
-          <a
-            class="btn btn-outline-primary"
-            href="http://gitter.im/petervmeijgaard"
-            target="_blank"
-          >
-            <i
-              class="fa fa-github fa-fw"
-              aria-hidden="true"
-            ></i>
-            <span class="pl-2">
-              Gitter
-            </span>
-          </a>
-          <a
-            class="btn btn-outline-primary"
-            href="http://github.com/petervmeijgaard"
-            target="_blank"
-          >
-            <i
-              class="fa fa-github fa-fw"
-              aria-hidden="true"
-            ></i>
-            <span class="pl-2">
-              GitHub
-            </span>
-          </a>
-          <a
-            class="btn btn-outline-primary"
-            href="http://twitter.com/petervmeijgaard"
-            target="_blank"
-          >
-            <i class="fa fa-twitter fa-fw" aria-hidden="true"></i>
-            <span class="pl-2">
-              Twitter
-            </span>
-          </a>
-        </p>
-        <p>
-          For bugs, see:
-        </p>
-        <a
-          class="btn btn-outline-primary"
-          href="https://github.com/petervmeijgaard/vue-2.0-boilerplate/issues"
-          target="_blank"
-        >
-          <i class="fa fa-github fa-fw" aria-hidden="true"></i>
-          <span class="pl-2">
-            GitHub
-          </span>
-        </a>
+      <div slot="body">主内容页</div>
+      <div slot="footer" :showDate="showDate">
+        <div>来自主页面</div>
+        <button type="button" class="btn btn-info " @click="toggle1">去子组件并传递数据</button>
       </div>
-      <div slot="footer">
-        Made with love by Vivid Web
-      </div>
+
     </v-card>
+    <v-card contextual-style="dark" v-else>
+      <span slot="header">
+        组件主页
+      </span>
+      <div slot="body">组件内容页</div>
+      <div slot="footer">
+        <div>来自组件页面</div>
+        <my-button showDate="***父组件传递的数据***" @toggleEvent="toggle"></my-button>
+      </div>
+
+    </v-card>
+
   </v-layout>
 </template>
 
 <script>
-  /* ============
-   * Home Index Page
-   * ============
-   *
-   * The home index page.
+/* ============
+ * Home Index Page
+ * ============
+ *
+ * The home index page.
+ */
+
+import VLayout from '@/layouts/Default';
+import VCard from '@/components/Card';
+import MyButton from '@/components/MyButton';
+
+export default {
+  /**
+   * The name of the page.
    */
-
-  import VLayout from '@/layouts/Default';
-  import VCard from '@/components/Card';
-
-  export default {
-    /**
-     * The name of the page.
-     */
-    name: 'home-index',
-
-    /**
-     * The components that the page can use.
-     */
-    components: {
-      VLayout,
-      VCard,
+  name: 'home-index',
+  data() {
+    return {
+      show: true,
+      showDate: "父子间传过来的数据"
+    }
+  },
+  methods: {
+    toggle1(){
+this.show =false;
     },
-  };
+    toggle(data) {
+      console.log(data)
+      this.show = data;
+    }
+  },
+  mounted() {
+    // this.toggle();
+  },
+  /**
+   * The components that the page can use.
+   */
+  components: {
+    VLayout,
+    VCard,
+    MyButton
+  },
+};
 </script>
