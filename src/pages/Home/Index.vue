@@ -4,7 +4,19 @@
       <span slot="header">
         一级主页面
       </span>
-      <div slot="body">主内容页</div>
+      <div slot="body">主内容页
+        <!-- <div v-for="item in listTittle" :key="item.id">{{item}}</div>         -->
+        <!-- <div v-for="item in list" :key="item.id">
+            <p>{{listTittle}}{{item.name }}</p>
+          </div> -->
+        <div>
+          <ul>
+            <li>需求：{{lists.demand}}</li>
+            <li>用户：{{lists.user}}</li>
+            <li>时间：{{lists.time}}</li>
+          </ul>
+        </div>
+      </div>
       <div slot="footer" :showDate="showDate">
         <div>来自主页面</div>
         <button type="button" class="btn btn-info " @click="toggle1">去子组件并传递数据</button>
@@ -46,20 +58,55 @@ export default {
   data() {
     return {
       show: true,
-      showDate: "父子间传过来的数据"
+      showDate: "父子间传过来的数据",
+      lists: {
+        demand: [],
+        user: [],
+        time: []
+      },
+      list: [{ id: 1, name: '需求1', code: 'admin.demand' },
+      { id: 2, name: '需求2', code: 'admin.demand' },
+      { id: 3, name: '用户1', code: 'admin.user' },
+      { id: 4, name: '用户2', code: 'admin.user' },
+      { id: 5, name: '时间1', code: 'admin.time' },
+      { id: 6, name: '时间2', code: 'admin.time' },
+      { id: 7, name: '用户3', code: 'admin.user' },]
     }
   },
   methods: {
-    toggle1(){
-this.show =false;
+    toggle1() {
+      this.show = false;
     },
     toggle(data) {
       console.log(data)
       this.show = data;
+    },
+    listinfo() {
+
+      this.list.map((x) => {
+        console.log(x.code.split(".")[1])
+        switch (x.code.split(".")[1]) {
+          case "demand":
+            this.lists.demand.push(x.name);
+            // 执行代码块 1
+            break;
+          case "user":
+            // 执行代码块 2
+            this.lists.user.push(x.name);
+            break;
+          case "time":
+            // 执行代码块 3
+            this.lists.time.push(x.name);
+            break;
+          default:
+
+        }
+      })
     }
   },
   mounted() {
     // this.toggle();
+    this.listinfo();
   },
   /**
    * The components that the page can use.
