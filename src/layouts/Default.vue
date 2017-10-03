@@ -15,7 +15,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div
         class="collapse navbar-collapse"
         :class="{ show : menuCollapsed}"

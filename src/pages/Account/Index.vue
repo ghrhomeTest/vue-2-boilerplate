@@ -7,30 +7,30 @@
       <div slot="body">
         <table class="table table-striped">
           <thead>
-          <tr>
-            <th>
-              First Name
-            </th>
-            <th>
-              Last Name
-            </th>
-            <th>
-              Email
-            </th>
-          </tr>
+            <tr>
+              <th>
+                First Name
+              </th>
+              <th>
+                Last Name
+              </th>
+              <th>
+                Email
+              </th>
+            </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>
-              {{$store.state.account.firstName}}
-            </td>
-            <td>
-              {{$store.state.account.lastName}}
-            </td>
-            <td>
-              {{$store.state.account.email}}
-            </td>
-          </tr>
+            <tr>
+              <td>
+                {{$store.state.account.firstName}}
+              </td>
+              <td>
+                {{$store.state.account.lastName}}
+              </td>
+              <td>
+                {{$store.state.account.email}}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -42,30 +42,51 @@
 </template>
 
 <script>
-  /* ============
-   * Account Index Page
-   * ============
-   *
-   * Page where the user can view the account information.
+
+import VLayout from '@/layouts/Default';
+import VCard from '@/components/Card';
+import Axios from 'axios';
+export default {
+  /**
+   * The name of the page.
    */
+  name: 'account-index',
+  data() {
+    return {
+      data: {
+        name: '',
+        age: '',
+        email: ''
+      }
+    }
+  },
+  mounted() {
+    this.getinfo();
+  },
+  methods: {
+    getinfo() {
+      Axios.get('http://rapapi.org/mockjsdata/20947/requestQ', {
+        params: {
+          q: "12"
+        }
+      })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
 
-  import VLayout from '@/layouts/Default';
-  import VCard from '@/components/Card';
+    }
 
-  export default {
-    /**
-     * The name of the page.
-     */
-    name: 'account-index',
-mounted(){
-  // return this.$store.commit.email
-},
-    /**
-     * The components that the page can use.
-     */
-    components: {
-      VLayout,
-      VCard,
-    },
-  };
+  },
+  /**
+   * The components that the page can use.
+   */
+  components: {
+    VLayout,
+    VCard,
+    Axios
+  },
+};
 </script>
