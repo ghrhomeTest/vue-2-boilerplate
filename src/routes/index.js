@@ -11,13 +11,21 @@ export default [
     path: '/home',
     name: 'home.index',
     component: () => import('@/pages/Home/Index'),
+    
 
     // If the user needs to be authenticated to view this page
     meta: {
       auth: true,
     },
   },
-
+{
+      path: '/details',
+      name: 'details.index',
+      component: () => import('@/pages/Home/details'),
+      meta: {
+        auth: true,
+      },
+    },
   // Account
   {
     path: '/account',

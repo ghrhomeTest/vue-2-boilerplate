@@ -34,7 +34,7 @@
       </div>
 
     </v-card>
-
+<button @click="details()">去详情页面</button>
   </v-layout>
 </template>
 
@@ -81,6 +81,14 @@ export default {
       console.log(data)
       this.show = data;
     },
+    details(){
+      const userId = 123
+      // this.$router.push({ path: `/details/${userId}` }) 
+     this.$router.push({name:'details.index', query:{
+       id:45,
+       data:this.showDate
+     }})
+    },
     listinfo() {
 
       this.list.map((x) => {
@@ -116,5 +124,11 @@ export default {
     VCard,
     MyButton
   },
+    watch:{
+        $route(to, from) {  
+                console.log(to);  
+                console.log(from);  
+            } 
+    }
 };
 </script>
